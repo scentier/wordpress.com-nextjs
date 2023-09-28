@@ -22,7 +22,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto_serif.className}>
-        <main className="md:container md:w-4/5 lg:w-2/3 xl:w-3/5 md:mx-auto pl-6 pr-4">
+        {/* <main className="md:container md:w-4/5 lg:w-2/3 xl:w-3/5 md:mx-auto pl-6 pr-4"> */}
+        <main className="max-w-[700px] lg:max-w-[960] mx-auto pt-9 px-7">
           {children}
         </main>
       </body>

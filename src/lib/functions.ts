@@ -12,6 +12,21 @@ export function slugDateFormat(d: string): string {
   return `${year}/${month}/${day}`;
 }
 
+export function excerptText(text: string) {
+  let res = text.match("<p.*?>(.*)</p>");
+  if (res) {
+    let excerpt = "";
+    if (res[1].length > 250) {
+      excerpt = `${res[1].substring(0, 250)}...`;
+    } else {
+      excerpt = res[1];
+    }
+    return excerpt;
+  } else {
+    return text;
+  }
+}
+
 export function formatDateToString(date: string) {
   const d = new Date(date);
   return d.toLocaleDateString("en-US", {
