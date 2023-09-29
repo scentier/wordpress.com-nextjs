@@ -12,12 +12,12 @@ export function slugDateFormat(d: string): string {
   return `${year}/${month}/${day}`;
 }
 
-export function excerptText(text: string) {
+export function excerptText(text: string, maxChar: number = 250) {
   let res = text.match("<p.*?>(.*)</p>");
   if (res) {
     let excerpt = "";
-    if (res[1].length > 250) {
-      excerpt = `${res[1].substring(0, 250)}...`;
+    if (res[1].length > maxChar) {
+      excerpt = `${res[1].substring(0, maxChar)}...`;
     } else {
       excerpt = res[1];
     }
