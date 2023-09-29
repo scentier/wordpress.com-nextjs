@@ -56,7 +56,7 @@ export default async function Home() {
         }}
         className="min-h-[148px] sm:min-h-[366px] bg-cover bg-center bg-no-repeat"
       ></div>
-      <main className="max-w-[700px] lg:max-w-[960] mx-auto pt-9 px-7">
+      <main className="max-w-[700px] lg:max-w-[960px] mx-auto pt-9 px-7">
         {posts.map((post, index) => (
           <div
             key={post.ID}
