@@ -9,7 +9,6 @@ import Link from "next/link";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { FaCommentAlt } from "react-icons/fa";
 import { Source_Serif_4 } from "next/font/google";
-import Image from "next/image";
 
 const source_serif_4 = Source_Serif_4({
   weight: "400",
@@ -35,31 +34,33 @@ export default async function Home() {
   return (
     <>
       <header className="absolute top-14 md:top-12 left-0 right-0 mx-auto mb-8 z-[2]">
-        <Link
-          className="flex flex-row m-0 w-full h-14 mx-8 xl:my-9"
-          href={SITE_URL}
-        >
-          <Image
-            src="/assets/wpcom-wmark.svg"
-            alt={SITE_TITLE}
-            className="p-3 w-12 h-12 bg-[#0087be] bg-center bg-no-repeat text-white block"
-            width={32}
-            height={32}
-            priority
-          />
-          <h1>{SITE_TITLE}</h1>
-        </Link>
+        <div className="flex flex-row m-0 w-full h-14 mx-8 xl:my-9">
+          <div className="flex justify-center items-center w-12 h-12 bg-sky-700">
+            <div className="w-8 h-8 bg-[url('/assets/wpcom-wmark.svg')] bg-cover bg-center bg-no-repeat text-white block"></div>
+          </div>
+          <h1 className="text-white flex items-center">
+            <Link
+              className="pl-5 pr-4 pt-2 pb-3 mb-2 font-light text-xl bg-sky-900 hover:bg-sky-700 text-white"
+              href={SITE_URL}
+            >
+              {SITE_TITLE}
+            </Link>
+          </h1>
+        </div>
       </header>
-      {!!posts && posts[0].featured_image}
+      <div
+        style={{
+          backgroundImage: posts[0].featured_image
+            ? `url(${posts[0].featured_image}?w=2000)`
+            : `url(./assets/featured-image-placeholder.svg)`,
+        }}
+        className="min-h-[148px] sm:min-h-[366px] bg-cover bg-center bg-no-repeat"
+      ></div>
       <main className="max-w-[700px] lg:max-w-[960] mx-auto pt-9 px-7">
         {posts.map((post, index) => (
           <div key={post.ID} className="mx-3 my-5">
             {index === 0 ? (
               <>
-                {/* <img
-                  className="w-full mb-3"
-                  src={`${post.featured_image}?resize=900,450`}
-                /> */}
                 <h2 className="pb-5 my-4 border-b-[1px] border-slate-200 text-3xl text-sky-600 hover:text-sky-500">
                   <Link href={`${slugDateFormat(post.date)}/${post.slug}`}>
                     {post.title}
@@ -68,9 +69,6 @@ export default async function Home() {
               </>
             ) : (
               <>
-                {/* {(post.featured_image = "")} */}
-                <p>index: {index}</p>
-
                 <div className="flex flex-row justify-between">
                   <Link
                     className="abosolute w-1/3 bottom-7 top-0 bg-sky-50 bg-cover bg-center bg-no-repeat border-solid border-[1px] border-sky-100"
