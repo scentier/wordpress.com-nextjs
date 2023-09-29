@@ -33,7 +33,7 @@ export default async function Home() {
   const posts: TPost[] = await data.posts;
   return (
     <>
-      <header className="absolute top-14 md:top-12 left-0 right-0 mx-auto mb-8 z-[2]">
+      <header className="absolute top-14 md:top-12 mx-auto mb-8 z-[2]">
         <div className="flex flex-row m-0 w-full h-14 mx-8 xl:my-9">
           <div className="flex justify-center items-center w-12 h-12 bg-sky-700">
             <div className="w-8 h-8 bg-[url('/assets/wpcom-wmark.svg')] bg-cover bg-center bg-no-repeat text-white block"></div>
