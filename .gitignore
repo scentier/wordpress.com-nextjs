@@ -44,3 +44,6 @@ next-env.d.ts
 *.njsproj
 *.sln
 *.sw?
+
+# https support for development: next dev --experimental-https
+certificates
