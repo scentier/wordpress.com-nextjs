@@ -21,7 +21,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={roboto_serif.className}>{children}</body>
+      {/* <body className={roboto_serif.className}>{children}</body> */}
+      <body className="font-sans">{children}</body>
     </html>
   );
 }

@@ -19,7 +19,10 @@ const source_serif_4 = Source_Serif_4({
 async function getPosts<T>() {
   const postNumber = 10;
   const res = await fetch(
-    `${API_URI}/sites/${BLOG_ID}/posts/?number=${postNumber}&order=DESC`
+    `${API_URI}/sites/${BLOG_ID}/posts/?number=${postNumber}&order=DESC`,
+    {
+      cache: "no-store",
+    }
   );
 
   if (!res.ok) throw Error("failed to fetch");
@@ -33,8 +36,29 @@ export default async function Home() {
   const posts: TPost[] = await data.posts;
   return (
     <>
-      <header className="absolute top-14 md:top-12 mx-auto mb-8 z-[2]">
-        <div className="flex flex-row m-0 w-full h-14 mx-8 xl:my-9">
+      <nav className="flex overflow-hidden justify-between h-14 bg-sky-600 text-white py-3 px-6">
+        <div className="mx-0">
+          <Link
+            className="flex flex-row space-x-2 items-center"
+            href={SITE_URL}
+          >
+            <img
+              className="w-6 h-6"
+              src="./assets/wpcom-wmark.svg"
+              alt={SITE_TITLE}
+            />
+            <span className="text-xl">{SITE_TITLE}</span>
+          </Link>
+        </div>
+        <div className="flex space-x-3 items-center">
+          <div className="font-semibold">Log In</div>
+          <div className="font-semibold border-solid border-[1px] border-slate-50 px-2 py-1 rounded">
+            Get Started
+          </div>
+        </div>
+      </nav>
+      <header className="absolute top-16 mx-auto mb-8 z-[2]">
+        <div className="flex flex-row w-full h-14 mx-8 sm:my-4 lg:my-9">
           <div className="flex justify-center items-center w-12 h-12 bg-sky-700">
             <div className="w-8 h-8 bg-[url('/assets/wpcom-wmark.svg')] bg-cover bg-center bg-no-repeat text-white block"></div>
           </div>
