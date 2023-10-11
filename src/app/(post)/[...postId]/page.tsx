@@ -1,5 +1,18 @@
-import { TPostContent } from "@/lib/types";
+import { slugDateFormat } from "@/lib/functions";
+import { TPost, TPostContent } from "@/lib/types";
 import { API_URI, BLOG_ID } from "@/lib/variables";
+
+// https://nextjs.org/docs/app/api-reference/functions/generate-static-params
+export async function generateStaticParams() {
+  const postNumber = 10;
+  const endpoint = `${API_URI}/sites/${BLOG_ID}/posts/?number=${postNumber}&order=DESC`;
+  const res = await fetch(endpoint).then((res) => res.json());
+  const posts: TPost[] = await res.posts;
+
+  return posts.map((post) => ({
+    postId: `${slugDateFormat(post.date)}/${post.slug}`.split("/"),
+  }));
+}
 
 type Props = {
   params: { postId: string };
@@ -7,7 +20,6 @@ type Props = {
 
 async function getPost<T>(slug: string) {
   const endpoint = `${API_URI}/sites/${BLOG_ID}/posts/slug:${slug}`;
-  console.log(endpoint);
   const res = await fetch(endpoint, {
     next: { revalidate: 3600 },
   });
