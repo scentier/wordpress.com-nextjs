@@ -34,10 +34,13 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Create .env file
+      env:
+        blog_id: ${{ vars.BLOG_ID }}
+        api_uri: ${{ vars.WP_PUBLIC_API }}
         run: |
           touch .env
-          echo BLOG_ID=$BLOG_ID >> .env
-          echo WP_PUBLIC_API=$WP_PUBLIC_API >> .env
+          echo BLOG_ID=$blog_id >> .env
+          echo WP_PUBLIC_API=$api_uri >> .env
           cat .env
 
       - name: Install Node.js
