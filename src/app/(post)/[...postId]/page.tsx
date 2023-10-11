@@ -1,9 +1,31 @@
+import { TPostContent } from "@/lib/types";
+import { API_URI, BLOG_ID } from "@/lib/variables";
+
 type Props = {
   params: { postId: string };
 };
 
-export default function post({ params }: Props) {
+async function getPost<T>(slug: string) {
+  const endpoint = `${API_URI}/sites/${BLOG_ID}/posts/slug:${slug}`;
+  console.log(endpoint);
+  const res = await fetch(endpoint, {
+    next: { revalidate: 3600 },
+  });
+
+  if (!res.ok) throw Error("failed to fetch");
+  const data = await res.json();
+
+  return data;
+}
+
+export default async function post({ params }: Props) {
   const postId = params.postId;
-  console.log(postId[1]);
-  return <div>{postId}</div>;
+  const postSlug = postId[3];
+  const post: TPostContent = await getPost(postSlug);
+  return (
+    <div>
+      <h1>{post.title}</h1>
+      <div>{post.content}</div>
+    </div>
+  );
 }

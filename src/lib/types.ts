@@ -17,3 +17,7 @@ export type TPost = {
   author: TAuthor;
   discussion: TComment;
 };
+
+export type TPostContent = TPost & {
+  content: string;
+};
