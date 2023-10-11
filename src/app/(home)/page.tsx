@@ -9,6 +9,7 @@ import Link from "next/link";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { FaCommentAlt } from "react-icons/fa";
 import { Source_Serif_4 } from "next/font/google";
+import Image from "next/image";
 
 const source_serif_4 = Source_Serif_4({
   weight: "400",
@@ -42,10 +43,12 @@ export default async function Home() {
             className="flex flex-row space-x-2 items-center"
             href={SITE_URL}
           >
-            <img
+            <Image
               className="w-6 h-6"
               src="./assets/wpcom-wmark.svg"
               alt={SITE_TITLE}
+              width={24}
+              height={24}
             />
             <span className="text-xl">{SITE_TITLE}</span>
           </Link>
@@ -130,9 +133,12 @@ export default async function Home() {
                   />
                   <div className="flex flex-row justify-between text-slate-400 text-sm">
                     <p className="flex flex-row items-center">
-                      <img
+                      <Image
                         className="mr-3 relative rounded-full h-8 w-8 overflow-hidden"
                         src={post.author.avatar_URL}
+                        alt={post.author.name}
+                        width={32}
+                        height={32}
                       />
                       {post.author.name}
                     </p>
