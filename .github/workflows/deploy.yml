@@ -33,6 +33,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Create .env file
+        run: |
+          touch .env
+          echo BLOG_ID=$BLOG_ID >> .env
+          echo WP_PUBLIC_API=$WP_PUBLIC_API >> .env
+          cat .env
+
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
