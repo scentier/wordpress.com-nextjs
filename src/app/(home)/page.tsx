@@ -22,7 +22,7 @@ async function getPosts<T>() {
   const res = await fetch(
     `${API_URI}/sites/${BLOG_ID}/posts/?number=${postNumber}&order=DESC`,
     {
-      next: { revalidate: 3600 },
+      cache: "no-store",
     }
   );
 
